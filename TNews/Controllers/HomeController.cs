@@ -14,8 +14,28 @@ namespace TNews.Controllers
         }
 
         public IActionResult Index()
+        {// Simulated news articles, you can fetch them from a database or external API
+            var newsArticles = new List<Article>
         {
-            return View();
+            new Article {
+                Title = "Breaking News: Something Big Happened",
+                Description = "This is a short description of the news article.",
+                ImageUrl = "https://via.placeholder.com/150",
+                Source = "CNN",
+                Url = "https://www.cnn.com",
+                PublishedDate = DateTime.Now.AddHours(-1)
+            },
+            new Article {
+                Title = "Tech Update: New Gadgets Announced",
+                Description = "This is a short description of the tech news.",
+                ImageUrl = "https://via.placeholder.com/150",
+                Source = "TechCrunch",
+                Url = "https://www.techcrunch.com",
+                PublishedDate = DateTime.Now.AddHours(-5)
+            },
+        };
+
+            return View(newsArticles);
         }
 
         public IActionResult World()

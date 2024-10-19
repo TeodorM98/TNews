@@ -1,3 +1,5 @@
+using TNews.Services;
+
 namespace TNews
 {
     public class Program
@@ -8,6 +10,11 @@ namespace TNews
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Register HttpClient and NewsService for dependency injection
+            //The HttpClient service is responsible for making HTTP requests to external APIs (like NewsAPI) to fetch news articles.
+            //NewsService that contains the logic for calling the News API and fetching articles. It’s injected into the controller.
+            builder.Services.AddHttpClient<NewsService>();
 
             var app = builder.Build();
 

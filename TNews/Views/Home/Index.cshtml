@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TNews.Models.Article>  
+﻿@model IEnumerable<TNews.Models.Article>
 <!-- Bind the model to a collection of Article objects in HomeController-->
 
 @{
@@ -11,17 +11,16 @@
 
 <div class="container mt-5">
     <div class="row">
-        <!-- This Razor loop iterates over the Model (which is the list of articles), creating a new Bootstrap card for each article. -->
         @foreach (var article in Model)
         {
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="@article.ImageUrl" class="card-img-top" alt="@article.Title" style="height: 200px; object-fit: cover;">
+                    <img src="@article.UrlToImage" class="card-img-top" alt="@article.Title" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">@article.Title</h5>
                         <p class="card-text">@article.Description</p>
-                        <p class="card-text"><small class="text-muted">Source: @article.Source</small></p>
-                        <p class="card-text"><small class="text-muted">Published: @article.PublishedDate.ToString("MMMM dd, yyyy HH:mm")</small></p>
+                        <p class="card-text"><small class="text-muted">Source: @article.SourceName</small></p>
+                        <p class="card-text"><small class="text-muted">Published: @article.PublishedAt.ToString("MMMM dd, yyyy HH:mm")</small></p>
                         <a href="@article.Url" class="btn btn-primary" target="_blank">Read More</a>
                     </div>
                 </div>
@@ -29,6 +28,3 @@
         }
     </div>
 </div>
-
-<!-- Optional: Include Bootstrap 4 if you haven't added it already -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

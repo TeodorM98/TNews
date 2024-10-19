@@ -1,41 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TNews.Models;
+using TNews.Services;
 
 namespace TNews.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        private readonly NewsService _newsService;
+
+        public HomeController(NewsService newsService)
         {
-            _logger = logger;
+            _newsService = newsService;
         }
 
-        public IActionResult Index()
-        {// Simulated news articles, you can fetch them from a database or external API
-            var newsArticles = new List<Article>
+        public async Task<IActionResult> Index()
         {
-            new Article {
-                Title = "Breaking News: Something Big Happened",
-                Description = "This is a short description of the news article.",
-                ImageUrl = "https://via.placeholder.com/150",
-                Source = "CNN",
-                Url = "https://www.cnn.com",
-                PublishedDate = DateTime.Now.AddHours(-1)
-            },
-            new Article {
-                Title = "Tech Update: New Gadgets Announced",
-                Description = "This is a short description of the tech news.",
-                ImageUrl = "https://via.placeholder.com/150",
-                Source = "TechCrunch",
-                Url = "https://www.techcrunch.com",
-                PublishedDate = DateTime.Now.AddHours(-5)
-            },
-        };
+            // Fetch the articles from the News API service
+            var newsArticles = await _newsService.GetNewsAsync();
 
-            return View(newsArticles);
+            return View(newsArticles);  // Pass the articles to the view
         }
 
         public IActionResult World()
